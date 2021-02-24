@@ -8,7 +8,11 @@ class GoodyHutRegistry extends EntityRegistry_1.EntityRegistry {
         super(GoodyHut_1.default);
     }
     getByTile(tile) {
-        return this.filter((goodyHut) => goodyHut.tile() === tile);
+        const goodyHuts = this.filter((goodyHut) => goodyHut.tile() === tile);
+        if (goodyHuts.length === 0) {
+            return null;
+        }
+        return goodyHuts[0];
     }
 }
 exports.GoodyHutRegistry = GoodyHutRegistry;

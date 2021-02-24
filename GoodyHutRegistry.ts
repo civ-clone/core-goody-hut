@@ -6,7 +6,7 @@ import {
 import Tile from '@civ-clone/core-world/Tile';
 
 export interface IGoodyHutRegistry extends IEntityRegistry<GoodyHut> {
-  getByTile(tile: Tile): GoodyHut[];
+  getByTile(tile: Tile): GoodyHut | null;
 }
 
 export class GoodyHutRegistry
@@ -16,10 +16,16 @@ export class GoodyHutRegistry
     super(GoodyHut);
   }
 
-  getByTile(tile: Tile): GoodyHut[] {
-    return this.filter(
+  getByTile(tile: Tile): GoodyHut | null {
+    const goodyHuts = this.filter(
       (goodyHut: GoodyHut): boolean => goodyHut.tile() === tile
     );
+
+    if (goodyHuts.length === 0) {
+      return null;
+    }
+
+    return goodyHuts[0];
   }
 }
 

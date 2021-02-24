@@ -1,13 +1,13 @@
 import GoodyHut from './GoodyHut';
 import Unit from '@civ-clone/core-unit/Unit';
 
-export interface IGoodyHutAction {
+export interface IAction {
   goodyHut(): GoodyHut;
   perform(): void;
   unit(): Unit;
 }
 
-export class Action implements IGoodyHutAction {
+export class Action implements IAction {
   #goodyHut: GoodyHut;
   #unit: Unit;
 

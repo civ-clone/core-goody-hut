@@ -15,23 +15,26 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _ruleRegistry, _tile;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GoodyHut = void 0;
+const Action_1 = require("./Rules/Action");
 const ActionPerformed_1 = require("./Rules/ActionPerformed");
+const DataObject_1 = require("@civ-clone/core-data-object/DataObject");
 const Discovered_1 = require("./Rules/Discovered");
 const RuleRegistry_1 = require("@civ-clone/core-rule/RuleRegistry");
-const Action_1 = require("./Rules/Action");
-class GoodyHut {
+class GoodyHut extends DataObject_1.DataObject {
     constructor(tile, ruleRegistry = RuleRegistry_1.instance) {
+        super();
         _ruleRegistry.set(this, void 0);
         _tile.set(this, void 0);
         __classPrivateFieldSet(this, _ruleRegistry, ruleRegistry);
         __classPrivateFieldSet(this, _tile, tile);
+        this.addKey('tile');
     }
     action(action) {
         action.perform();
         __classPrivateFieldGet(this, _ruleRegistry).process(ActionPerformed_1.ActionPerformed, this, action);
     }
     actions(unit) {
-        return __classPrivateFieldGet(this, _ruleRegistry).process(Action_1.default, this, unit);
+        return __classPrivateFieldGet(this, _ruleRegistry).process(Action_1.Action, this, unit);
     }
     process(unit) {
         __classPrivateFieldGet(this, _ruleRegistry).process(Discovered_1.Discovered, this, unit);
