@@ -11,7 +11,8 @@ export interface IGoodyHutRegistry extends IEntityRegistry<GoodyHut> {
 
 export class GoodyHutRegistry
   extends EntityRegistry<GoodyHut>
-  implements IGoodyHutRegistry {
+  implements IGoodyHutRegistry
+{
   constructor() {
     super(GoodyHut);
   }

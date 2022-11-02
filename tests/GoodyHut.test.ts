@@ -1,20 +1,18 @@
+import { expect, use, spy } from 'chai';
 import Action from '../Action';
 import ActionRule from '../Rules/Action';
+import Criterion from '@civ-clone/core-rule/Criterion';
+import Discovered from '../Rules/Discovered';
+import Effect from '@civ-clone/core-rule/Effect';
 import Generator from '@civ-clone/core-world-generator/Generator';
 import GoodyHut from '../GoodyHut';
 import Player from '@civ-clone/core-player/Player';
+import RuleRegistry from '@civ-clone/core-rule/RuleRegistry';
 import Terrain from '@civ-clone/core-terrain/Terrain';
 import Tile from '@civ-clone/core-world/Tile';
 import Unit from '@civ-clone/core-unit/Unit';
 import World from '@civ-clone/core-world/World';
-import * as chai from 'chai';
 import * as spies from 'chai-spies';
-import RuleRegistry from '@civ-clone/core-rule/RuleRegistry';
-import Effect from '@civ-clone/core-rule/Effect';
-import Criterion from '@civ-clone/core-rule/Criterion';
-import Discovered from '../Rules/Discovered';
-
-const { expect, use } = chai;
 
 use(spies);
 
@@ -22,12 +20,12 @@ describe('GoodyHut', (): void => {
   it('should perform `Action` passed in to `action`', (): void => {
     const tile = new Tile(0, 0, new Terrain(), new World(new Generator(1, 1))),
       goodyHut = new GoodyHut(tile),
-      spy = chai.spy(),
+      actionSpy = spy(),
       unit = new Unit(null, new Player(), tile),
       action = new Action(goodyHut, unit),
       SpyAction = class extends Action {
         perform(): void {
-          spy();
+          actionSpy();
         }
       },
       spyAction = new SpyAction(goodyHut, unit);
@@ -35,13 +33,13 @@ describe('GoodyHut', (): void => {
     goodyHut.action(action);
     goodyHut.action(spyAction);
 
-    expect(spy).to.called.once;
+    expect(actionSpy).to.called.once;
     expect(spyAction.goodyHut()).to.equal(goodyHut);
     expect(spyAction.unit()).to.equal(unit);
 
     spyAction.perform();
 
-    expect(spy).to.called.twice;
+    expect(actionSpy).to.called.twice;
   });
 
   it('should return registered `Action`s when `actions` is called', (): void => {
@@ -82,13 +80,13 @@ describe('GoodyHut', (): void => {
       ruleRegistry = new RuleRegistry(),
       goodyHut = new GoodyHut(tile, ruleRegistry),
       unit = new Unit(null, new Player(), tile),
-      spy = chai.spy();
+      actionSpy = spy();
 
-    ruleRegistry.register(new Discovered(new Effect(spy)));
+    ruleRegistry.register(new Discovered(new Effect(actionSpy)));
 
     goodyHut.process(new Unit(null, new Player(), tile));
 
-    expect(spy).to.called.once;
-    expect(spy).to.called.with(goodyHut, unit);
+    expect(actionSpy).to.called.once;
+    expect(actionSpy).to.called.with(goodyHut, unit);
   });
 });

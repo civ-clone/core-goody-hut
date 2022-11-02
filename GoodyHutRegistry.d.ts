@@ -9,7 +9,8 @@ export interface IGoodyHutRegistry extends IEntityRegistry<GoodyHut> {
 }
 export declare class GoodyHutRegistry
   extends EntityRegistry<GoodyHut>
-  implements IGoodyHutRegistry {
+  implements IGoodyHutRegistry
+{
   constructor();
   getByTile(tile: Tile): GoodyHut | null;
 }
