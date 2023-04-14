@@ -6,6 +6,12 @@ import AdditionalData from '@civ-clone/core-data-object/AdditionalData';
 import GoodyHut from '../GoodyHut';
 import Tile from '@civ-clone/core-world/Tile';
 
+declare global {
+  interface TileAdditionalData {
+    goodyHut: GoodyHut | null;
+  }
+}
+
 export const getAdditionalData = (
   goodyHutRegistry: GoodyHutRegistry = goodyHutRegistryInstance
 ) => [

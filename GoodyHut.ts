@@ -34,9 +34,9 @@ export class GoodyHut extends DataObject implements IGoodyHut {
   }
 
   action(action: Action): void {
-    action.perform();
-
     this.#ruleRegistry.process(ActionPerformed, this, action);
+
+    action.perform();
   }
 
   actions(unit: Unit): Action[] {

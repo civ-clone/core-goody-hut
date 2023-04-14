@@ -28,8 +28,8 @@ class GoodyHut extends DataObject_1.DataObject {
         this.addKey('tile');
     }
     action(action) {
-        action.perform();
         __classPrivateFieldGet(this, _GoodyHut_ruleRegistry, "f").process(ActionPerformed_1.default, this, action);
+        action.perform();
     }
     actions(unit) {
         return __classPrivateFieldGet(this, _GoodyHut_ruleRegistry, "f").process(Action_1.default, this, unit);
