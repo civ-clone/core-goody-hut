@@ -6,7 +6,8 @@ export interface IAction {
   unit(): Unit;
 }
 export declare class Action implements IAction {
-  #private;
+  private _goodyHut;
+  private _unit;
   constructor(goodyHut: GoodyHut, unit: Unit);
   goodyHut(): GoodyHut;
   perform(): void;

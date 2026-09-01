@@ -21,34 +21,34 @@ export interface IGoodyHut extends IDataObject {
 }
 
 export class GoodyHut extends DataObject implements IGoodyHut {
-  #ruleRegistry: RuleRegistry;
-  #tile: Tile;
+  private _ruleRegistry: RuleRegistry;
+  private _tile: Tile;
 
   constructor(tile: Tile, ruleRegistry: RuleRegistry = ruleRegistryInstance) {
     super();
 
-    this.#ruleRegistry = ruleRegistry;
-    this.#tile = tile;
+    this._ruleRegistry = ruleRegistry;
+    this._tile = tile;
 
     this.addKey('tile');
   }
 
   action(action: Action): void {
-    this.#ruleRegistry.process(ActionPerformed, this, action);
+    this._ruleRegistry.process(ActionPerformed, this, action);
 
     action.perform();
   }
 
   actions(unit: Unit): Action[] {
-    return this.#ruleRegistry.process(ActionRule, this, unit);
+    return this._ruleRegistry.process(ActionRule, this, unit);
   }
 
   process(unit: Unit): void {
-    this.#ruleRegistry.process(Discovered, this, unit);
+    this._ruleRegistry.process(Discovered, this, unit);
   }
 
   tile(): Tile {
-    return this.#tile;
+    return this._tile;
   }
 }
 

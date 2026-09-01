@@ -8,22 +8,22 @@ export interface IAction {
 }
 
 export class Action implements IAction {
-  #goodyHut: GoodyHut;
-  #unit: Unit;
+  private _goodyHut: GoodyHut;
+  private _unit: Unit;
 
   constructor(goodyHut: GoodyHut, unit: Unit) {
-    this.#goodyHut = goodyHut;
-    this.#unit = unit;
+    this._goodyHut = goodyHut;
+    this._unit = unit;
   }
 
   goodyHut(): GoodyHut {
-    return this.#goodyHut;
+    return this._goodyHut;
   }
 
   perform(): void {}
 
   unit(): Unit {
-    return this.#unit;
+    return this._unit;
   }
 }
 
