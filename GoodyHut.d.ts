@@ -13,6 +13,7 @@ export interface IGoodyHut extends IDataObject {
   tile(): Tile;
 }
 export declare class GoodyHut extends DataObject implements IGoodyHut {
+  static readonly transient: string[];
   private _ruleRegistry;
   private _tile;
   constructor(tile: Tile, ruleRegistry?: RuleRegistry);

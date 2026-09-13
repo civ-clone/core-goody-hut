@@ -21,6 +21,7 @@ export interface IGoodyHut extends IDataObject {
 }
 
 export class GoodyHut extends DataObject implements IGoodyHut {
+  static readonly transient = ['_ruleRegistry'];
   private _ruleRegistry: RuleRegistry;
   private _tile: Tile;
 

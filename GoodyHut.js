@@ -28,5 +28,6 @@ class GoodyHut extends DataObject_1.DataObject {
     }
 }
 exports.GoodyHut = GoodyHut;
+GoodyHut.transient = ['_ruleRegistry'];
 exports.default = GoodyHut;
 //# sourceMappingURL=GoodyHut.js.map
